@@ -229,14 +229,13 @@
 </body>
 </html>
 <div id="uploadimageModal" class="modal" role="dialog">
-    <div class="modal-dialog"> <!--主定位盒子-->
+    <div class="modal-dialog" style="width: 400px; height: 600px"> <!--主定位盒子-->
         <div class="modal-content"><!--控制弹窗大小的盒子-->
-            <div class="modal-header"> <!--弹窗标题栏-->
+            <div class="modal-header" style="flex-direction: column; height: 130px; line-height: 20px; padding: 15px"> <!--弹窗标题栏-->
                 <h4 class="modal-title">Please Crop the Image</h4> <!--标题栏文字-->
-                <span class="cropNote">The network can only distinguish 10 classifications.</span>
-                <span class="cropNote">Of course, I can't prevent you uploading a strange image to embarrass my Neural Network brother - - !.</span>
+                <span class="cropNote" style="margin-bottom: 13px">The network can only distinguish 10 classifications. Of course, I can't prevent you uploading a strange image to embarrass the Network~</span>
             </div>
-            <div class="modal-body"> <!--下半部主框体-->
+            <div class="modal-body" style="height: 400px; padding-top: 5px"> <!--下半部主框体-->
                 <div class="row">
                     <div class="col-md-8 text-center"><!--裁剪区-->
                         <div id="image_demo" style="width: 350px; margin-top: 30px"></div>
@@ -244,8 +243,8 @@
                 </div>
             </div>
             <div class="modal-footer"> <!--底部叉叉按钮-->
-                <button class="btn btn-success crop_image">Crop & Upload Image</button>
-                <button type="button" class="btn btn-warning" data-dismiss="modal" id="upload_btn">Close</button>
+                <button class="btn btn-success crop_image" style="margin-right: 20px">Crop & Upload Image</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal" id="upload_btn" style="margin-right: 28px">Close</button>
             </div>
         </div>
     </div>
