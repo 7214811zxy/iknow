@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>predict</title>
+    <script src="/static/jquery.min.js"></script>
+</head>
+<body>
+{% comment %}API: 在页面内增加一个提交按钮，输入一个包含分类信息的数组列表，返回data包含了预测的分类{% endcomment %}
+<input class="submit" type="submit" value="submit">
+<script>
+    // 输入: 数组变量
+    // 返回: 预测结果
+    var jsonData = ['1574857060.jpg', 3, 1, 2, 6, '1574855844.jpg'];
+    $(".submit").click(function () {
+        $.ajax({
+            url: '/runpredict/',
+            type: 'POST',
+            data: {'class': JSON.stringify(jsonData)},
+            success: function (data) {
+                console.log(data)
+            }
+        })
+    })
+</script>
+</body>
+</html>

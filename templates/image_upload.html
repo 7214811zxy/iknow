@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>JQuery And AJAX</title>
+    <script src="/static/jquery.min.js"></script>
+    <script src="/static/bootstrap.min.js"></script>
+    <script src="/static/croppie.min.js"></script>
+    <link rel="stylesheet" href="/static/croppie.css">
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+</head>
+<body>
+<div class="uploadBox">
+    <input class="aload" type="button" value="Upload Image" onclick="javascript: $('#upload_image').click()">
+    <input type="file" name="upload_image" id="upload_image" style="display: none">
+    <div id="uploaded_image"></div>
+</div>
+
+</body>
+</html>
+<div id="uploadimageModal" class="modal" role="dialog">
+    <div class="modal-dialog"> <!--主定位盒子-->
+        <div class="modal-content"><!--控制弹窗大小的盒子-->
+            <div class="modal-header"> <!--弹窗标题栏-->
+                <h4 class="modal-title">Please Crop the Image</h4> <!--标题栏文字-->
+                <span class="cropNote">The network can only distinguish 10 classifications.</span>
+                <span class="cropNote">Of course, I can't prevent you uploading a strange image to embarrass my Neural Network brother - - !.</span>
+            </div>
+            <div class="modal-body"> <!--下半部主框体-->
+                <div class="row">
+                    <div class="col-md-8 text-center"><!--裁剪区-->
+                        <div id="image_demo" style="width: 350px; margin-top: 30px"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"> <!--底部叉叉按钮-->
+                <button class="btn btn-success crop_image">Crop & Upload Image</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $image_crop = $('#image_demo').croppie({
+            enableExif: true,
+            viewport: {
+                width: 200,
+                height: 200,
+                type: 'square'
+            },
+            boundary: {
+                width: 300,
+                height: 300
+            }
+        });
+
+        $('#upload_image').on('change', function () {
+            var reader = new FileReader();
+            reader.onload = function (event) {
+                $image_crop.croppie('bind', {
+                    url: event.target.result
+                }).then(function () {
+                    console.log('jQuery bind complete');
+                });
+            };
+            reader.readAsDataURL(this.files[0]);
+            console.log('marker');
+            $('#uploadimageModal').modal('show');
+        });
+
+        $('.crop_image').click(function (event) {
+            $image_crop.croppie('result', {
+                type: 'canvas',
+                size: 'viewport'
+            }).then(function (response) {
+                $.ajax({
+                    //此处的response是通过base64编码的图像数据
+                    url: "/upload/",
+                    method: "POST",
+                    data: {"image": response},
+                    success: function (data) {
+                        console.log(typeof data['fileName']);
+                        console.log(data['fileName']);
+                        $('#uploadimageModal').modal('hide');
+                        $('#uploaded_image').html(data['imgPath']);//将裁剪得到的图片显示在盒子#uploaded_image里面
+                        $('#upload_image').val("");//清除#upload_image内的url值，否则无法重新上传相同的图片
+                    }
+                });
+            })
+        });
+    });
+</script>

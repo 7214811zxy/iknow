@@ -1,0 +1,715 @@
+/* General Type */
+body {
+    font-family: "Helvetica", "Arial", sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    font-size: 34px;
+}
+header h1 {
+    line-height: 1.45em;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+}
+h1 b {
+    font-weight: 400;
+    color: rgba(255, 255, 255, 1);
+}
+h2 {
+    margin: 5px 0;
+    font-weight: 300;
+    font-size: 18px;
+}
+h3 {
+    margin: 10px 0;
+}
+h4 {
+    font-size: 20px;
+    font-weight: 400;
+}
+/*btn被选中时不出现蓝色边框*/
+button, input {
+    font-family: 'Microsoft YaHei', 'Heiti SC', tahoma, arial, 'Hiragino Sans GB', \\5B8B\4F53, sans-serif;
+    outline: none;
+}
+/*清楚li前的小圆点*/
+li {
+    list-style: none;
+}
+
+/* Header */
+.github-link {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+}
+.github-link .bg {
+    fill: #fff;
+    fill-opacity: 0.2;
+}
+.github-link:hover .bg {
+    fill-opacity: 0.3;
+}
+.github-link .icon {
+    fill: #fff;
+    fill-opacity: 0.6;
+}
+.github-link:hover .icon {
+    fill-opacity: 0.7;
+}
+/*版心*/
+.w{
+    width: 1200px;
+    margin: 0 auto;
+}
+
+/*link线条*/
+.link-base {
+    stroke: #0877BD;
+    stroke-width: 0.5;
+    fill: none; /*此处必须设置为none否则无法画出线条，会对path进行填充*/
+    stroke-dasharray: 15, 2; /*grap实线长度50，dash虚线长度为2*/
+    opacity: 0.5;
+}
+
+.link-layers {
+    position: absolute;
+    width: 608px;
+    height: 385px;
+    top: 110px;
+    left: 230px;
+    /*background-color: rgb(0,0,0);*/
+    /*opacity: 0.5;*/
+/*如果要改这个值，要同时改变base中.link-layers的width 和 #network .layer-hidden的margin-left*/
+}
+
+.net-layer{
+    z-index: -1;
+}
+/*####################################################################*/
+/*标题*/
+header {
+    border-bottom: solid 1px rgba(0,0,0,0.4);
+    background-color: #183D4E;
+    color: white;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    position: relative;
+}
+header h1 {
+    font-size: 30px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    -webkit-font-smoothing: antialiased;
+}
+/*icon字体引用*/
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?bupolf');
+  src:  url('fonts/icomoon.eot?bupolf#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?bupolf') format('truetype'),
+    url('fonts/icomoon.woff?bupolf') format('woff'),
+    url('fonts/icomoon.svg?bupolf#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-step-forward:before {
+  content: "\e900";
+}
+.icon-pause:before {
+  content: "\e901";
+}
+.icon-location2:before {
+  content: "\e948";
+}
+.icon-play3:before {
+  content: "\ea1c";
+}
+.icon-plus:before {
+  content: "\ea0a";
+}
+.icon-minus:before {
+  content: "\ea0b";
+}
+.icon-pause2:before {
+  content: "\ea1d";
+}
+.icon-refresh:before {
+  content: "\e902";
+}
+
+
+/**********顶部主控制栏**********/
+/*top control主框体和版心*/
+#top-controls{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+.container{
+    display: flex;
+    width: 1200px;
+    height: 62px;
+    margin: 0 auto;
+    /*background-color: #5cb85c;*/
+}
+
+/*时间控制栏框体*/
+.timeline-controls{
+    width: 140px;
+    height: 62px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.timeline-controls button{
+    color: #122b40;
+    background: white;
+    border-radius: 50%;
+}
+.material-icons{
+    font-family: icomoon;
+    font-style: normal;
+    font-size: 24px;
+}
+#reset-button{
+    display: flex;
+    width: 32px;
+    height: 32px;
+}
+#reset-button i{
+    font-size: 18px;
+}
+#play-pause-button{
+    display: flex;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    color: white;
+    background-color: #122b40;
+}
+#play-pause-button i{
+    margin-left: 10px;
+}
+#next-step-button{
+    display: flex;
+    width: 32px;
+    height: 32px;
+}
+#next-step-button i{
+    margin-left: -3px;
+    margin-top: -3px;
+}
+
+
+/*参数控制栏*/
+.control{
+    height: 62px;
+    float: left;
+    margin-left: 30px;
+    color: #3c3c3c;
+}
+.control label{
+    display: block;
+    margin-bottom: 12px;
+}
+.control .select select{
+    height: 30px;
+    width: 140px;
+    border: none;
+    border-bottom: #cccccc solid 1px;
+    outline: none;
+}
+
+/*Epoch显示*/
+#epochBox{
+    width: 150px;
+}
+#epochBox span{
+    display: block;
+}
+#epochBox .label{
+    font-size: 13px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+#epochBox .value{
+    font-size: 24px;
+    color: black;
+    margin-left: 10px;
+}
+
+/**********神经网络主要部分**********/
+#main-part{
+    position: relative;
+    height: 520px;
+/*    background-color: #5cb85c;*/
+    margin-top: 30px;
+}
+
+/*第一列的框体*/
+#main-part .column-data{
+    width: 122px;
+    height:518px;
+    float: left;
+/*    background-color: orange;*/
+}
+/*DATA和which dataset do you want to use*/
+.column-data h4{
+    margin: 0px;
+}
+.column-data span{
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.ui-dataset{
+    display: flex;
+    flex-direction: column;
+/*    background-color: #a94442;*/
+    align-items: center;
+    height: 356px;
+
+}
+.ui-dataset p{
+    line-height: 1.38em;
+    color: #777;
+    margin-top: 10px;
+    font-size: 15px;
+}
+/*供选择的学习类型*/
+.dataset-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-content: space-evenly;
+    width: 120px;
+    height: 245px;
+    /*background-color: #2aabd2;*/
+}
+.dataset-list .dataset{
+    width: 48px;
+    height: 48px;
+    border-radius: 5px;
+}
+.dataset:nth-child(1){
+    background: url("/static/images/01track.jpg") no-repeat;
+    background-size: cover;
+}
+.dataset:nth-child(2){
+    background: url("/static/images/02horse.jpg") no-repeat;
+    background-size: cover;
+
+}
+.dataset:nth-child(3){
+    background: url("/static/images/03plane.jpg") no-repeat;
+    background-size: cover;
+}
+.dataset:nth-child(4){
+    background: url("/static/images/04cat.jpg") no-repeat;
+    background-size: cover;
+}
+.dataset:nth-child(5){
+    background: url("/static/images/05bird.jpg") no-repeat;
+    background-size: cover;
+}
+.dataset:nth-child(6){
+    background: url("/static/images/06deer.jpg") no-repeat;
+    background-size: cover;
+}
+.dataset:nth-child(7){
+    background: url("/static/images/07dog.jpg") no-repeat;
+    background-size: cover;
+}
+.dataset:nth-child(8){
+    background: url("/static/images/08frog.jpg") no-repeat;
+    background-size: cover;
+}
+.dataset:nth-child(9){
+    background: url("/static/images/09boat.jpg") no-repeat;
+    background-size: cover;
+}
+.dataset:nth-child(10){
+    background: url("/static/images/10car.jpg") no-repeat;
+    background-size: cover;
+}
+/*头像裁剪框*/
+.uploadBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    /*background-color: #5A8DCD;*/
+}
+.aload{
+    width: 100px;
+    height: 40px;
+}
+
+#upload_btn{
+    padding: 1px;
+    font-size: 15px;
+    width: 105px;
+    height: 35px;
+    margin: 5px;
+}
+
+
+
+.modal-content{
+    width: 400px;
+}
+.modal-header{
+    height: 100px;
+}
+.modal-dialog{
+    width: 400px;
+    margin: 10px auto;
+}
+.modal-footer{
+    display: flex;
+    justify-content: space-evenly;
+}
+.cropNote{
+    text-align: left;
+    color: #B4B4B4;
+}
+.modal-header{
+    height: 110px;
+}
+.modal-body{
+    height: 375px;
+    padding: 15px;
+    padding-top: 0px;
+}
+.img-thumbnail{
+     padding: 0;!important;
+ }
+
+/*第二列框体*/
+.column-features{
+    width: 122px;
+    height: 518px;
+    margin-left: 40px;
+    /*background: #75C50A;*/
+    float: left;
+}
+.column-features h4{
+    margin: 0;
+}
+.column-features p{
+    font-size: 15px;
+    margin-top: 10px;
+    color: #777777;
+}
+
+/*第三列框体*/
+.column-hidden-layers{
+    width: 488px;
+    height: 518px;
+    float: left;
+/*    background: #5cb85c;*/
+    margin-left: 40px;
+}
+.column-hidden-layers h4{
+    margin: 0;
+    text-align: center;
+}
+.column-hidden-layers .bracket{
+    margin-top: 5px;
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-bottom: 0;
+    height: 4px;
+}
+.layerName{
+    margin: 0;
+    display: flex;
+    justify-content: space-evenly;
+}
+.layerName li{
+    font-size: 15px;
+    color: #777777;
+}
+.hidden-layers-control{
+    display: flex;
+    justify-content: center;
+    outline: none;
+}
+.hidden-layers-control button{
+    width: 30px;
+    height: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+}
+.hidden-layers-control button:hover{
+    background-color: #C1C1C1;
+}
+.hidden-layers-control button:active{
+    background-color: #6c757d;
+}
+.hidden-layers-control i{
+    outline: none;
+    font-size: 10px;
+}
+
+
+/*第四列框体*/
+.column-output{
+    width: 275px;
+    height: 518px;
+    float: left;
+    /*background: #8a6d3b;*/
+    margin-left: 40px;
+}
+.column-output h4{
+    margin: 0;
+    text-align: left;
+}
+.metric{
+    width: 275px;
+    height: 60px;
+    /*background: #2aabd2;*/
+    display: flex;
+    justify-content: space-between;
+}
+
+.loss-function{
+    width: 130px;
+    height: 60px;
+    display: flex;
+    /*background: #75C50A;*/
+    flex-direction: column;
+    justify-content: space-evenly;
+
+}
+.test-loss{
+    height: 20px;
+    width: 100px;
+    display: flex;
+    justify-content: left;
+}
+.test-loss span{
+    font-size: 13px;
+    line-height: 20px;
+}
+.test-loss .value{
+    font-size: 13px;
+    line-height: 20px;
+    margin-left: 10px;
+}
+
+.training-loss{
+    height: 20px;
+    width: 120px;
+    display: flex;
+    justify-content: left;
+}
+.training-loss span{
+    font-size: 13px;
+    line-height: 20px;
+}
+.training-loss .value{
+    font-size: 13px;
+    line-height: 20px;
+    margin-left: 10px;
+}
+#lineChart{
+    width: 130px;
+    height: 60px;
+    /*background: #a94442;*/
+    border-bottom: #777777 solid 1px;
+}
+
+#heatMap{
+    margin-top: 5px;
+    width: 300px;
+    height: 300px;
+    background: #00b3ff;
+}
+.userDefine{
+    width: 300px;
+    height: 80px;
+    background: #666666;
+    margin-top: 5px;
+}
+
+/**********文档部分**********/
+/*文档说明*/
+#article-text{
+    height: 900px;
+    background-color: burlywood;
+    margin-top: 20px;
+}
+
+/**********netWork部分**********/
+/*network底色*/
+#network{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    top: -10px;
+    left: 0px;
+    width: 675px;
+    height: 385px;
+    /*background: #4FEF10;*/
+}
+/*标签层*/
+#network ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 65px;
+    height: 355px;
+    align-items: center;
+    margin-right: 2px;
+    padding: 0;
+    color: #666666;
+}
+/*输入层*/
+
+/*神经网络主层*/
+.net-layer-father{
+    width: 608px;
+    height: 385px;
+    display: flex;
+    justify-content: space-between;
+    /*background-color: #d39e00;*/
+    /*opacity: 0.5;*/
+    z-index: 1;
+}
+#network .layer-input{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 50px;
+/*    background-color: #2b669a;*/
+}
+.layer-input div{
+    width: 46px;
+    height: 46px;
+    background-color: #cccccc;
+    border: #777777 solid 1.5px;
+    border-radius: 5px;
+}
+.layer-input .canvas-1{
+    background-size: cover;
+}
+.layer-input .canvas-2{
+    background-size: cover;
+}
+.layer-input .canvas-3{
+    background-size: cover;
+}
+.layer-input .canvas-4{
+    background-size: cover;
+}
+.layer-input .canvas-5{
+    background-size: cover;
+}
+.layer-input .canvas-6{
+    background-size: cover;
+}
+
+#network .layer-hidden{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 50px;
+    height: 500px;
+    margin-top: -50px;
+    /*background-color: #2b669a;*/
+}
+.layer-hidden div{
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+    background-color: #c0a16b;
+    border: #777777 solid 1.5px;
+    border-radius: 5px;
+    background-color: #cccccc;
+}
+.layer-hidden .btn-box{
+    height: 40px;
+    width: 80px;
+    padding: 0;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    border: none;
+    background: none;
+}
+.layer-hidden i{
+    font-size: 14px;
+    font-family: icomoon;
+    color: #1b1e21;
+}
+.layer-hidden .btn-box button{
+    width: 26px;
+    height: 26px;
+    /*background-color: #EEEEEE;*/
+    border-radius: 50%;
+    border: none;
+    outline: none;
+}
+.layer-hidden .btn-box button:hover{
+    background-color: #C1C1C1;
+}
+.layer-hidden .btn-box button:active{
+    background-color: #6c757d;
+}
+
+
+
+#network .layer-output{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 50px;
+    height: 385px;
+/*    background-color: #2b669a;*/
+}
+.layer-output div{
+    width: 56px;
+    height: 40px;
+    background-color: #CCCCCC;
+    border: #777777 solid 2px;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 40px;
+    font-family: "Arial Black";
+    font-size: medium;
+    color: white;
+}

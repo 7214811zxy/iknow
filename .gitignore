@@ -1,0 +1,5 @@
+database/
+.idea/
+images/
+__pycache__/
+datasets/

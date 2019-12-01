@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Jupyter Zhu的个人站点，包含了一些NetWork的可视化实现"/>
+    <meta name="keywords" content="network, CNN"/>
+    <title>ZJupyter Home —— NetWork Learning</title>
+    <script src="/static/jquery.min.js"></script>
+    <script src="/static/jquery-ui.min.js"></script>
+    <script src="/static/bootstrap.min.js"></script>
+    <script src="/static/croppie.min.js"></script>
+    <link rel="icon" href="/static/favicon.ico"/>
+    <link rel="stylesheet" href="/static/iknow.css">
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/croppie.css">
+    <link rel="stylesheet" href="/static/jquery-ui.min.css">
+
+
+<body>
+<!--小猫的超链接Logo-->
+<a class="github-link" href="#" title="Source on GitHub">
+    <svg viewBox="0 0 60.5 60.5" width="60" height="60">
+        <polygon class="bg" points="60.5,60.5 0,0 60.5,0 "/>
+        <path class="icon"
+              d="M43.1,5.8c-6.6,0-12,5.4-12,12c0,5.3,3.4,9.8,8.2,11.4c0.6,0.1,0.8-0.3,0.8-0.6c0-0.3,0-1,0-2c-3.3,0.7-4-1.6-4-1.6c-0.5-1.4-1.3-1.8-1.3-1.8c-1.1-0.7,0.1-0.7,0.1-0.7c1.2,0.1,1.8,1.2,1.8,1.2c1.1,1.8,2.8,1.3,3.5,1c0.1-0.8,0.4-1.3,0.8-1.6c-2.7-0.3-5.5-1.3-5.5-5.9c0-1.3,0.5-2.4,1.2-3.2c-0.1-0.3-0.5-1.5,0.1-3.2c0,0,1-0.3,3.3,1.2c1-0.3,2-0.4,3-0.4c1,0,2,0.1,3,0.4c2.3-1.6,3.3-1.2,3.3-1.2c0.7,1.7,0.2,2.9,0.1,3.2c0.8,0.8,1.2,1.9,1.2,3.2c0,4.6-2.8,5.6-5.5,5.9c0.4,0.4,0.8,1.1,0.8,2.2c0,1.6,0,2.9,0,3.3c0,0.3,0.2,0.7,0.8,0.6c4.8-1.6,8.2-6.1,8.2-11.4C55.1,11.2,49.7,5.8,43.1,5.8z"/>
+    </svg>
+</a>
+
+<!--标题栏-->
+<header>
+    <h1 class="l--page">
+        Train a
+        <b>Neural Network</b>
+        <span class="optional">Right Here </span>
+        in Your Browser.
+        <br>Upload Images for Online Classification!!!
+    </h1>
+</header>
+
+<!-- 顶部控制栏 -->
+<div id="top-controls">
+    <div class="container w">
+        <div class="timeline-controls">
+            <button id="reset-button" title="Reset the network" style="outline: none">
+                <i class="material-icons"></i>
+            </button>
+            <button id="play-pause-button" title="Run/Pause" style="outline: none">
+                <i class="material-icons"></i>
+            </button>
+            <button id="next-step-button" title="Step" style="outline: none">
+                <i class="material-icons"></i>
+            </button>
+        </div>
+        <div class="control" id="epochBox">
+            <span class="label">Epoch</span>
+            <span class="value" id="iter-number">000,360</span>
+        </div>
+        <div class="control">
+            <label for="learningRate">Learning rate</label>
+            <div class="select">
+                <select id="learningRate">
+                    <option value="0.00001">0.00001</option>
+                    <option value="0.0001">0.0001</option>
+                    <option value="0.001">0.001</option>
+                    <option value="0.003">0.003</option>
+                    <option value="0.01">0.01</option>
+                    <option value="0.03">0.03</option>
+                    <option value="0.1">0.1</option>
+                    <option value="0.3">0.3</option>
+                    <option value="1">1</option>
+                    <option value="3">3</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
+        </div>
+        <div class="control">
+            <label for="activations">Activation</label>
+            <div class="select">
+                <select id="activations">
+                    <option value="relu">ReLU</option>
+                    <option value="tanh">Tanh</option>
+                    <option value="sigmoid">Sigmoid</option>
+                    <option value="linear">Linear</option>
+                </select>
+            </div>
+        </div>
+        <div class="control">
+            <label for="regularizations">Regularization</label>
+            <div class="select">
+                <select id="regularizations">
+                    <option value="none">None</option>
+                    <option value="L1">L1</option>
+                    <option value="L2">L2</option>
+                </select>
+            </div>
+        </div>
+        <div class="control">
+            <label for="regularRate">Regularization rate</label>
+            <div class="select">
+                <select id="regularRate">
+                    <option value="0">0</option>
+                    <option value="0.001">0.001</option>
+                    <option value="0.003">0.003</option>
+                    <option value="0.01">0.01</option>
+                    <option value="0.03">0.03</option>
+                    <option value="0.1">0.1</option>
+                    <option value="0.3">0.3</option>
+                    <option value="1">1</option>
+                    <option value="3">3</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
+        </div>
+        <div class="control">
+            <label for="problem">Problem type</label>
+            <div class="select">
+                <select id="problem">
+                    <option value="classification">Classification</option>
+                    <option value="regression">Regression</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--神经网络主部分-->
+<div id="main-part" class="w">
+    <div class="column-data">
+        <h4>
+            <span>DATA</span>
+        </h4>
+        <div class="ui-dataset">
+            <p>Which dataset do you want to use?</p>
+            <div class="dataset-list">
+                <button class="dataset" value="10"></button>
+                <button class="dataset" value="8"></button>
+                <button class="dataset" value="1"></button>
+                <button class="dataset" value="4"></button>
+                <button class="dataset" value="2"></button>
+                <button class="dataset" value="5"></button>
+                <button class="dataset" value="6"></button>
+                <button class="dataset" value="7"></button>
+                <button class="dataset" value="9"></button>
+                <button class="dataset" value="3"></button>
+            </div>
+            <!--图像上传裁剪-->
+            <div class="uploadBox">
+                <input class="aload btn btn-primary" type="button" value="Upload Image" id="upload_btn"
+                       onclick="javascript: $('#upload_image').click()">
+                <input type="file" name="upload_image" id="upload_image" style="display: none">
+                <!--<div id="uploaded_image"></div>-->
+            </div>
+            <button class="netFlow btn-danger" style="width: 105px; height: 35px; border-radius: 5px; outline: none;">Net Flow</button>
+        </div>
+    </div>
+    <div class="column-features">
+        <h4>SAMPLES</h4>
+        <!--<p>Which properties do you want to feed it?</p>-->
+        <p>Samples selected from the database randomly</p>
+        <div id="network">
+            <div class="input_label net-layer">
+                <ul>
+                    <li class="label1">Sample1</li>
+                    <li class="label2">Sample2</li>
+                    <li class="label3">Sample3</li>
+                    <li class="label4">Sample4</li>
+                    <li class="label5">Sample5</li>
+                    <li class="label6">Sample6</li>
+                </ul>
+            </div>
+            <div class="net-layer-father">
+                <div class="layer-input net-layer">
+                    <div class="canvas-1" data-index="1"></div>
+                    <div class="canvas-2" data-index="2"></div>
+                    <div class="canvas-3" data-index="3"></div>
+                    <div class="canvas-4" data-index="4"></div>
+                    <div class="canvas-5" data-index="5"></div>
+                    <div class="canvas-6" data-index="6"></div>
+                </div>
+                <div class="layer-output net-layer">
+                    <div class="canvas-1" data-index="1"></div>
+                    <div class="canvas-2" data-index="2"></div>
+                    <div class="canvas-3" data-index="3"></div>
+                    <div class="canvas-4" data-index="4"></div>
+                    <div class="canvas-5" data-index="5"></div>
+                    <div class="canvas-6" data-index="6"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column-hidden-layers">
+        <div class="hidden-layers-control">
+            <button class="hidden-layer-plus" style="outline: none;"><i class="material-icons"></i></button>
+            <h4>HIDDEN LAYERS</h4>
+            <button class="hidden-layer-minus" style="outline: none"><i class="material-icons"></i></button>
+        </div>
+        <div class="bracket"></div>
+        <div class="layerName">
+            <li>CONV1</li>
+            <li>Pooling1</li>
+            <li>CONV2</li>
+            <li>Pooling2</li>
+        </div>
+    </div>
+    <div class="column-output">
+        <h4>OUTPUT</h4>
+        <div class="metric">
+            <div class="loss-function">
+                <div class="test-loss">
+                    <span>Test loss</span>
+                    <div class="value">0.526</div>
+                </div>
+                <div class="training-loss">
+                    <span>Training loss</span>
+                    <div class="value">0.123</div>
+                </div>
+            </div>
+            <div id="lineChart"></div>
+        </div>
+        <div id="heatMap"></div>
+        <div class="userDefine"></div>
+    </div>
+    <svg class="link-layers"></svg>
+</div>
+
+<!--文档说明部分-->
+<div id="article-text" class="w"></div>
+<script src="/static/iknow2.js"></script>
+</body>
+</html>
+<div id="uploadimageModal" class="modal" role="dialog">
+    <div class="modal-dialog"> <!--主定位盒子-->
+        <div class="modal-content"><!--控制弹窗大小的盒子-->
+            <div class="modal-header"> <!--弹窗标题栏-->
+                <h4 class="modal-title">Please Crop the Image</h4> <!--标题栏文字-->
+                <span class="cropNote">The network can only distinguish 10 classifications.</span>
+                <span class="cropNote">Of course, I can't prevent you uploading a strange image to embarrass my Neural Network brother - - !.</span>
+            </div>
+            <div class="modal-body"> <!--下半部主框体-->
+                <div class="row">
+                    <div class="col-md-8 text-center"><!--裁剪区-->
+                        <div id="image_demo" style="width: 350px; margin-top: 30px"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"> <!--底部叉叉按钮-->
+                <button class="btn btn-success crop_image">Crop & Upload Image</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal" id="upload_btn">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="layer-hidden net-layer" id="hidden" style="display: none">
+    <div class="btn-box">
+        <button class="hidden-btn-plus"><i class="material-icons"></i></button>
+        <button class="hidden-btn-minus"><i class="material-icons"></i></button>
+    </div>
+    <div class="canvas"></div>
+    <div class="canvas"></div>
+</div>
+<div class="sample" style="display: none">
+    <div class="canvas"></div>
+    <path d="M80,325C240,325 240,125 400,125" class="link-base" style="z-index: 9999;"></path>
+</div>
