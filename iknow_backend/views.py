@@ -40,7 +40,7 @@ def two_layer_net(image_array, showtime=False):
 
     # 获取权重和偏置参数
     start = time.process_time()
-    param = np.load(BASE_DIR + r"\static\model\twoFullyConnected.npy")
+    param = np.load(BASE_DIR + r"/static/model/twoFullyConnected.npy")
     model = fc_net.TwoLayerNet()
     model.params['W1'] = param[0]
     model.params['W2'] = param[1]
@@ -77,6 +77,7 @@ def image_load(request):
     fileName = str(millis) + '.jpg'
     # 文件绝对路径
     filePath = BASE_DIR + r'\static\database\upload\%s' % fileName
+    filePath = filePath.replace('\\', '/')
     # 相对路径(chrome不可外部引用，只能使用相对路径)
     webPath = r'\static\database\upload\%s' % fileName
     webPath = webPath.replace('\\', '/')
