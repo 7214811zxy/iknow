@@ -1,7 +1,6 @@
 /* General Type */
 body {
     font-family: "Helvetica", "Arial", sans-serif;
-    background-color: #f7f7f7;
     margin: 0;
     padding: 0;
 }
@@ -65,25 +64,27 @@ li {
 }
 /*版心*/
 .w{
-    width: 1200px;
+    width: 1064px;
     margin: 0 auto;
 }
 
 /*link线条*/
 .link-base {
     stroke: #0877BD;
-    stroke-width: 0.5;
+    stroke-width: 1.6;
     fill: none; /*此处必须设置为none否则无法画出线条，会对path进行填充*/
     stroke-dasharray: 15, 2; /*grap实线长度50，dash虚线长度为2*/
-    opacity: 0.5;
+    opacity: 0.7;
 }
 
 .link-layers {
     position: absolute;
     width: 608px;
     height: 385px;
+    /*top: 385px;*/
     top: 110px;
     left: 230px;
+    /*left: 373px;*/
     /*background-color: rgb(0,0,0);*/
     /*opacity: 0.5;*/
 /*如果要改这个值，要同时改变base中.link-layers的width 和 #network .layer-hidden的margin-left*/
@@ -112,15 +113,16 @@ header h1 {
 /*icon字体引用*/
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?bupolf');
-  src:  url('fonts/icomoon.eot?bupolf#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?bupolf') format('truetype'),
-    url('fonts/icomoon.woff?bupolf') format('woff'),
-    url('fonts/icomoon.svg?bupolf#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?lzvbxr');
+  src:  url('fonts/icomoon.eot?lzvbxr#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?lzvbxr') format('truetype'),
+    url('fonts/icomoon.woff?lzvbxr') format('woff'),
+    url('fonts/icomoon.svg?lzvbxr#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
 }
+
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
@@ -135,6 +137,13 @@ header h1 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.icon-cheveron-down:before {
+  content: "\e904";
+}
+.icon-envelope:before {
+  content: "\e905";
+}
 .icon-step-forward:before {
   content: "\e900";
 }
@@ -147,6 +156,9 @@ header h1 {
 .icon-play3:before {
   content: "\ea1c";
 }
+.icon-dice:before {
+  content: "\e915";
+}
 .icon-plus:before {
   content: "\ea0a";
 }
@@ -156,9 +168,17 @@ header h1 {
 .icon-pause2:before {
   content: "\ea1d";
 }
+.icon-trashcan:before {
+  content: "\e903";
+}
 .icon-refresh:before {
   content: "\e902";
 }
+.icon-wechat:before {
+  content: "\e906";
+  color: #7bb32e;
+}
+
 
 
 /**********顶部主控制栏**********/
@@ -186,44 +206,66 @@ header h1 {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    /*background-color: #5cb85c;*/
 }
 .timeline-controls button{
     color: #122b40;
     background: white;
     border-radius: 50%;
+    margin-left: 2px;
+    margin-right: 2px;
 }
 .material-icons{
     font-family: icomoon;
     font-style: normal;
     font-size: 24px;
 }
+
 #reset-button{
     display: flex;
     width: 32px;
     height: 32px;
+    border: none;
+}
+#reset-button:hover{
+    background-color: #ced4da;
 }
 #reset-button i{
     font-size: 18px;
+    margin-left: 1px;
 }
+
 #play-pause-button{
     display: flex;
-    width: 56px;
-    height: 56px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     color: white;
     background-color: #122b40;
+    border: none;
 }
 #play-pause-button i{
-    margin-left: 10px;
+    margin-left: 9px;
 }
+#play-pause-button:hover{
+    opacity: 0.8;
+}
+#play-pause-button:active{
+    box-shadow: 0 1px 10px 0 rgba(0,0,0,0.8), 0 1px 1px 0 rgba(0,0,0,0.2);
+}
+
 #next-step-button{
     display: flex;
     width: 32px;
     height: 32px;
+    border: none;
 }
 #next-step-button i{
-    margin-left: -3px;
-    margin-top: -3px;
+    margin-left: -1px;
+    margin-top: -2px;
+}
+#next-step-button:hover{
+    background-color: #ced4da;
 }
 
 
@@ -249,26 +291,45 @@ header h1 {
 /*Epoch显示*/
 #epochBox{
     width: 150px;
+    margin-left: 20px;
 }
 #epochBox span{
     display: block;
 }
 #epochBox .label{
-    font-size: 13px;
+    font-size: 20px;
+    font-weight: bold;
     margin-bottom: 10px;
-    margin-left: 10px;
+    margin-left: 12px;
 }
-#epochBox .value{
-    font-size: 24px;
-    color: black;
-    margin-left: 10px;
+#progress {
+    width: 100%;
+    height: 20px;
+    margin-top: 14px;
+    padding: 4px;
+    background-color: #ced4da;
+    border-radius: 10px;
+}
+
+#bar {
+    display: flex;
+    width: 0%;
+    height: 12px;
+    background: repeating-linear-gradient(-45deg, #ebf8e1, #8fd19e 15px);
+    border-radius: 5px;
+    animation: barberpole 60s linear infinite;
+}
+
+@keyframes barberpole {
+    0% {background-position: 0 }
+    100% {background-position: 600px}
 }
 
 /**********神经网络主要部分**********/
 #main-part{
     position: relative;
     height: 520px;
-/*    background-color: #5cb85c;*/
+    background-color: #F7F7F7;
     margin-top: 30px;
 }
 
@@ -370,6 +431,14 @@ header h1 {
 .aload{
     width: 100px;
     height: 40px;
+    background-color: #183D4E;
+    border: 1px solid #183D4E;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+.aload:hover{
+    opacity: 0.8;
 }
 
 #upload_btn{
@@ -431,7 +500,8 @@ header h1 {
 
 /*第三列框体*/
 .column-hidden-layers{
-    width: 488px;
+    /*width: 488px;*/
+    width: 400px;
     height: 518px;
     float: left;
 /*    background: #5cb85c;*/
@@ -457,6 +527,7 @@ header h1 {
     color: #777777;
 }
 .hidden-layers-control{
+    width: 410px;
     display: flex;
     justify-content: center;
     outline: none;
@@ -484,20 +555,25 @@ header h1 {
 
 /*第四列框体*/
 .column-output{
-    width: 275px;
+    /*width: 260px;*/
     height: 518px;
     float: left;
     /*background: #8a6d3b;*/
-    margin-left: 40px;
+    /*margin-left: 27px;*/
+    margin-left: 115px;
+    margin-top: 0px;
 }
 .column-output h4{
     margin: 0;
     text-align: left;
+    width: 130px;
+    margin-left: -50px;
 }
 .metric{
     width: 275px;
     height: 60px;
     /*background: #2aabd2;*/
+    margin-left: -50px;
     display: flex;
     justify-content: space-between;
 }
@@ -542,34 +618,206 @@ header h1 {
     line-height: 20px;
     margin-left: 10px;
 }
+
+/*图像展示区*/
 #lineChart{
-    width: 130px;
-    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 160px;
+    height: 115px;
     /*background: #a94442;*/
-    border-bottom: #777777 solid 1px;
+    /*border-bottom: #777777 solid 1px;*/
+    margin-top: -35px;
+}
+
+#lineChart img{
+    width: 66px;
+    height: 66px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: #777777 2px solid;
+}
+/*range样式*/
+.slider {
+    -webkit-appearance: none;
+    width: 100px;
+    height: 5px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    background: #d3d3d3;
+    outline: none;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #777777;
+    cursor: pointer;
+}
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
 }
 
 #heatMap{
-    margin-top: 5px;
-    width: 300px;
-    height: 300px;
-    background: #00b3ff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 22px;
+    width: 200px;
+    height: 385px;
+    /*background: #00b3ff;*/
 }
-.userDefine{
-    width: 300px;
-    height: 80px;
-    background: #666666;
-    margin-top: 5px;
+
+#heatMap svg{
+    width: 200px;
+    height: 50px;
+    /*background: #CCCCCC;*/
 }
 
 /**********文档部分**********/
 /*文档说明*/
 #article-text{
-    height: 900px;
-    background-color: burlywood;
-    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 1600px;
+    background-color: #FFFFFF;
+    box-shadow: 7px 0px 7px rgba(0, 0, 0, 0.1);
+    margin-top: 60px;
+}
+.contactMe{
+    margin-left: 280px;
+    margin-bottom: 40px;
+    width: 40px;
+    height: 20px;
+    line-height: 20px;
+    background: none;
+    border: none;
+}
+.to-manual{
+    margin-top: -30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: none;
+    box-shadow: 0 1px 0px 0 rgba(0,0,0,.12), 0 1px 1px 0 rgba(0,0,0,.24);
+}
+.to-manual:active{
+    box-shadow: 0 1px 10px 0 rgba(0,0,0,.12), 0 1px 1px 0 rgba(0,0,0,.24);
+}
+.to-manual i{
+    font-family: icomoon;
+    font-style: normal;
+    font-size: large;
+}
+.manual-1{
+    margin-top: 40px;
+    width: 600px;
+}
+.manual-1 h2{
+    font-family: "Roboto","Helvetica","Arial",sans-serif;font-size: 22px;
+    font-weight: bold;
+    line-height: 1.45em;
+    margin-bottom: 7px;
+    color: rgba(0, 0, 0, 0.6);
+
+}
+.manual-1 p{
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(0, 0, 0, 0.7);
+}
+.manual-2{
+    width: 600px;
+    height: 500px;
+}
+.manual-2 p{
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(0, 0, 0, 0.7);
+}
+.manual-2 h2{
+    font-family: "Roboto","Helvetica","Arial",sans-serif;font-size: 22px;
+    font-weight: bold;
+    line-height: 1.45em;
+    color: rgba(0, 0, 0, 0.6);
+
+}
+.manualGif{
+    width: 600px;
+    height: 326px;
+    background-image: url("/static/database/fmap/sample/howToUse.gif");
+    background-size: cover;
+}
+.translate{
+    width: 60px;
+    height: 25px;
+    font-size: x-small;
+    line-height: 20px;
+    margin-bottom: 8px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+.translate:hover{
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.1);
 }
 
+.translate:active{
+    background-color: #777777;
+    color: white;
+}
+
+
+
+/*#article-text .img-intro{*/
+/*    width: 100px;*/
+/*    height: 100px;*/
+/*    background: url("/static/database/fmap/sample/itro.jpg") no-repeat;*/
+/*    background-size:cover;*/
+/*}*/
+
+/*footer脚注部分*/
+#footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 120px;
+    background-color: #F7F7F7;
+    box-shadow: 7px 0px 7px rgba(0, 0, 0, 0.1);
+}
+
+#footer .myname{
+    font-size: 17px;
+    line-height: 1.6;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.5);
+
+}
+
+#footer .myemail{
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(0, 0, 0, 0.7);
+    margin-left: 40px;
+
+}
 /**********netWork部分**********/
 /*network底色*/
 #network{
@@ -587,13 +835,48 @@ header h1 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 65px;
-    height: 355px;
+    /*height: 355px;*/
     align-items: center;
     margin-right: 2px;
     padding: 0;
     color: #666666;
 }
+
+/*输入栏标签*/
+#network .input_label .ulf{
+    display: flex;
+    flex-direction: column;
+    /*background-color: #d39e00;*/
+    height: 385px;
+}
+#network .ulf li{
+    height: 50px;
+    width: 65px;
+    /*background-color: #d39e00;*/
+    text-align: end;
+}
+
+#network .ulf i{
+    font-family: icomoon;
+    font-size: small;
+    font-style: normal;
+    opacity: 0.8;
+}
+
+#network .ulf div{
+    display: flex;
+    margin-top: 3px;
+    margin-left: 30px;
+}
+#network .ulf button{
+    background-color:transparent;
+    margin-left: 5px;
+    outline: none;
+    padding: 0;
+    line-height: 12px;
+    border: none;
+}
+
 /*输入层*/
 
 /*神经网络主层*/
@@ -623,21 +906,28 @@ header h1 {
 }
 .layer-input .canvas-1{
     background-size: cover;
+    cursor: zoom-in;
 }
 .layer-input .canvas-2{
     background-size: cover;
+    cursor: zoom-in;
 }
 .layer-input .canvas-3{
     background-size: cover;
+    cursor: zoom-in;
+
 }
 .layer-input .canvas-4{
     background-size: cover;
+    cursor: zoom-in;
 }
 .layer-input .canvas-5{
     background-size: cover;
+    cursor: zoom-in;
 }
 .layer-input .canvas-6{
     background-size: cover;
+    cursor: zoom-in;
 }
 
 #network .layer-hidden{
@@ -670,6 +960,52 @@ header h1 {
     border: none;
     background: none;
 }
+
+/*隐藏层运算时的动画效果*/
+.layer-hidden svg{
+    margin-left: 1px;
+    width: 36px;
+    height: 36px;
+    animation: rotate 2s linear infinite;
+    /*background-color: #ced4da;*/
+}
+@keyframes rotate {
+    0%
+    {
+        transform: rotate(0deg);
+    }
+    100%
+    {
+        transform: rotate(360deg);
+    }
+}
+.layer-hidden svg circle{
+    width: 100%;
+    heigth: 100%;
+    fill: none;
+    stroke-width: 3;
+    stroke: #122B40;
+    /*transform: translate(5px,5px);*/
+    stroke-dasharray: 75.4;
+    stroke-dashoffset: 75.4;
+    animation: animate-load 4s linear infinite;
+}
+@keyframes animate-load{
+    0%, 100%
+    {
+        stroke-dashoffset: 75.4;
+    }
+    50%
+    {
+        stroke-dashoffset: 0;
+    }
+    50.1%
+    {
+        stroke-dashoffset: 152.8;
+    }
+}
+
+
 .layer-hidden i{
     font-size: 14px;
     font-family: icomoon;
@@ -690,6 +1026,10 @@ header h1 {
     background-color: #6c757d;
 }
 
+.layer-hidden .canvas{
+    background-size: cover;
+}
+
 
 
 #network .layer-output{
@@ -702,9 +1042,10 @@ header h1 {
 /*    background-color: #2b669a;*/
 }
 .layer-output div{
-    width: 56px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     background-color: #CCCCCC;
+    background-size: cover;
     border: #777777 solid 2px;
     border-radius: 5px;
     text-align: center;
@@ -712,4 +1053,5 @@ header h1 {
     font-family: "Arial Black";
     font-size: medium;
     color: white;
+    cursor: zoom-in;
 }

@@ -132,6 +132,7 @@ def predict(model, image):
     """
     classes_idex = ['Plane', 'Car', 'Bird', 'Cat', 'Deer', 'Dog', 'Frog', 'Horse', 'Ship', 'Truck']
 
+    # 对一个list进行预测
     if type(image) == list:
         pred_class = []
         for i in image:
@@ -140,6 +141,7 @@ def predict(model, image):
             pred_class.append(classes_idex[score[0].argmax()])
         return pred_class
 
+    # 对一张图片进行预测
     else:
         image = image[np.newaxis, :]
         score = model.loss(image)

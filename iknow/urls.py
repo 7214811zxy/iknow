@@ -18,11 +18,11 @@ from django.urls import path
 from iknow_backend import views
 
 urlpatterns = [
-    path('', views.main),
     path('admin/', admin.site.urls),
     path('sqltest/', views.sql_test),
     path('upload/', views.image_load),
-    path('cnn/', views.cnn),
+    path('', views.cnn),
     path('random_choose/', views.random_choose),
-    path('iknowPredict/', views.iknow_pred)
+    path('iknowPredict/', views.iknow_pred),
+    path('askProgress/', views.getProgress)
 ]

@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?bupolf');
-  src:  url('fonts/icomoon.eot?bupolf#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?bupolf') format('truetype'),
-    url('fonts/icomoon.woff?bupolf') format('woff'),
-    url('fonts/icomoon.svg?bupolf#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?lzvbxr');
+  src:  url('fonts/icomoon.eot?lzvbxr#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?lzvbxr') format('truetype'),
+    url('fonts/icomoon.woff?lzvbxr') format('woff'),
+    url('fonts/icomoon.svg?lzvbxr#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-cheveron-down:before {
+  content: "\e904";
+}
+.icon-envelope:before {
+  content: "\e905";
+}
 .icon-step-forward:before {
   content: "\e900";
 }
@@ -37,6 +43,9 @@
 .icon-play3:before {
   content: "\ea1c";
 }
+.icon-dice:before {
+  content: "\e915";
+}
 .icon-plus:before {
   content: "\ea0a";
 }
@@ -46,6 +55,13 @@
 .icon-pause2:before {
   content: "\ea1d";
 }
+.icon-trashcan:before {
+  content: "\e903";
+}
 .icon-refresh:before {
   content: "\e902";
+}
+.icon-wechat:before {
+  content: "\e906";
+  color: #7bb32e;
 }

@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="description" content="Jupyter Zhu的个人站点，包含了一些NetWork的可视化实现"/>
     <meta name="keywords" content="network, CNN"/>
-    <title>ZJupyter Home —— NetWork Learning</title>
+    <title>Visualization Convolutional Neural Networks</title>
     <script src="/static/jquery.min.js"></script>
     <script src="/static/jquery-ui.min.js"></script>
     <script src="/static/bootstrap.min.js"></script>
     <script src="/static/croppie.min.js"></script>
+    <script src="/static/d3.min.js"></script>
     <link rel="icon" href="/static/favicon.ico"/>
     <link rel="stylesheet" href="/static/iknow.css">
     <link rel="stylesheet" href="/static/bootstrap.min.css">
@@ -16,9 +17,9 @@
     <link rel="stylesheet" href="/static/jquery-ui.min.css">
 
 
-<body>
+<body style="background-color: #F7F7F7;">
 <!--小猫的超链接Logo-->
-<a class="github-link" href="#" title="Source on GitHub">
+<a class="github-link" href="https://github.com/7214811zxy/iknow" title="Source on GitHub">
     <svg viewBox="0 0 60.5 60.5" width="60" height="60">
         <polygon class="bg" points="60.5,60.5 0,0 60.5,0 "/>
         <path class="icon"
@@ -29,11 +30,11 @@
 <!--标题栏-->
 <header>
     <h1 class="l--page">
-        Train a
-        <b>Neural Network</b>
-        <span class="optional">Right Here </span>
-        in Your Browser.
-        <br>Upload Images for Online Classification!!!
+        Let's Look What
+        <b>Convolutional Neural Networks</b>
+        <span class="optional">are</span>
+        Thinking of.
+        <br>Upload Arbitrary Images to Test the Network
     </h1>
 </header>
 
@@ -52,8 +53,10 @@
             </button>
         </div>
         <div class="control" id="epochBox">
-            <span class="label">Epoch</span>
-            <span class="value" id="iter-number">000,360</span>
+            <span class="label">Progress</span>
+            <div id="progress">
+                <div id="bar"></div>
+            </div>
         </div>
         <div class="control">
             <label for="learningRate">Learning rate</label>
@@ -145,12 +148,12 @@
             </div>
             <!--图像上传裁剪-->
             <div class="uploadBox">
-                <input class="aload btn btn-primary" type="button" value="Upload Image" id="upload_btn"
+                <input class="aload" type="button" value="Upload" id="upload_btn"
                        onclick="javascript: $('#upload_image').click()">
                 <input type="file" name="upload_image" id="upload_image" style="display: none">
                 <!--<div id="uploaded_image"></div>-->
             </div>
-            <button class="netFlow btn-danger" style="width: 105px; height: 35px; border-radius: 5px; outline: none;">Net Flow</button>
+{#            <button class="netFlow btn-danger" style="width: 105px; height: 35px; border-radius: 5px; outline: none;">Net Flow</button>#}
         </div>
     </div>
     <div class="column-features">
@@ -158,14 +161,14 @@
         <!--<p>Which properties do you want to feed it?</p>-->
         <p>Samples selected from the database randomly</p>
         <div id="network">
-            <div class="input_label net-layer">
-                <ul>
-                    <li class="label1">Sample1</li>
-                    <li class="label2">Sample2</li>
-                    <li class="label3">Sample3</li>
-                    <li class="label4">Sample4</li>
-                    <li class="label5">Sample5</li>
-                    <li class="label6">Sample6</li>
+            <div class="input_label">
+                <ul class="ulf">
+                    <li class="label1">Sample</li>
+                    <li class="label2">Sample</li>
+                    <li class="label3">Sample</li>
+                    <li class="label4">Sample</li>
+                    <li class="label5">Sample</li>
+                    <li class="label6">Sample</li>
                 </ul>
             </div>
             <div class="net-layer-father">
@@ -207,25 +210,81 @@
         <div class="metric">
             <div class="loss-function">
                 <div class="test-loss">
-                    <span>Test loss</span>
-                    <div class="value">0.526</div>
+                    <span>Accuracy:</span>
+                    <div class="value">80%</div>
                 </div>
                 <div class="training-loss">
-                    <span>Training loss</span>
-                    <div class="value">0.123</div>
+                    <span>Model:</span>
+                    <div class="value">Simplified VGG16</div>
                 </div>
             </div>
-            <div id="lineChart"></div>
+            <div id="lineChart">
+                <img src="/static/database/fmap/sample/husky1.jpg">
+                <input type="range" min="32" max="100" value="66" class="slider" id="myRange">
+            </div>
         </div>
-        <div id="heatMap"></div>
-        <div class="userDefine"></div>
+        <div id="heatMap">
+            <svg></svg>
+            <svg></svg>
+            <svg></svg>
+            <svg></svg>
+            <svg></svg>
+            <svg></svg>
+        </div>
     </div>
     <svg class="link-layers"></svg>
+    </div>
 </div>
 
 <!--文档说明部分-->
-<div id="article-text" class="w"></div>
-<script src="/static/iknow2.js"></script>
+<div id="article-text" class="w">
+    <button class="to-manual" style="outline: none;">
+        <i></i>
+    </button>
+    <div class="manual-1">
+        <h2 style="text-align: center; color: darkorange; margin-bottom: 1px; line-height: 1.6">The website is <b>under construction</b>,
+            if you find any Bug or have some suggestions, please contact me.</h2>
+        <button class="contactMe" style="outline: none;">
+            <i style="font-family: icomoon; font-style: normal; color: darkorange; opacity: 0.8; font-size: large"></i>
+        </button>
+        <br>
+        <h2 class="intro-h2">Introduction</h2>
+        <button class="translate" style="outline: none">中文</button>
+        <button class="translate" style="outline: none">En</button>
+        <p class="intro-p">Convolutional Neural Networks (CNNs) and other deep networks have enabled unprecedented
+            breakthroughs in a variety of computer vision tasks, from image classification to object
+            detection. While these deep neural networks enable superior performance, their lack of
+            decomposability into intuitive and understandable components makes them hard to interpret.
+            <br><br>
+            For example, for an arbitrary input image, the network can give you a predict. But, <b>why they
+            predict what they predict?</b> why does the network think this image is a cat and another is a dog?
+            when the network fails, how to explain the reason?
+            For another example, compared to cats and dogs, classify airplanes and birds is easier. (You can practice here, select some cat and plane samples from the DATA column on the top-left, and click play to observe the accuracy of classification.
+            <br><br>
+        </p>
+        <div class="img-intro"></div>
+    </div>
+
+    <div class="manual-2">
+        <h2 class="howToUseH">How to Use This Site?</h2>
+        <p class="howToUseP">If you've used Google's <a href='http://playground.tensorflow.org/'>Tensorflow Playground</a>, right, my poor site just a version of the Convolutional Neural Network (Tensorflow playground is very interesting, he is my role model).
+            <br><br><b>1.</b> Select some samples from the <b>DATA</b> column, or upload some images as samples. <br>
+            <b>2.</b> Select the number of filters you want to visualize in <b>HIDDEN LAYERS</b>.<br>
+            <b>3.</b> Click the <b>Play</b> button to submit the calculation (more filters more calculation time, the number of filters does not affect the prediction result).<br>
+            <b>4.</b> When the calculation complete, the Grad-CAM images will be displayed in <b>OUTPUT</b>.
+            (What is Grad-CAM? A simple analogy, if you chose a cat sample, but your computer brother says, hi, I think it is a dog. Then confidently give you a picture where the most dog-like area on this picture is painted in red. If you want to know more details, you can see <a href="https://arxiv.org/abs/1610.02391">Selvaraju's paper.</a>)<br>
+            <b>5.</b> A loving GIF demo.</p>
+        <div class="manualGif"></div>
+        <p class="tips"><br><b>Tips:</b> Those sample images generated randomly from the cifar-10 dataset not included training images. The neural network used in this site is based on a simplified VGG16.</p>
+    </div>
+</div>
+
+{% comment %}footer{% endcomment %}
+<div id="footer">
+    <a class="myname">JupyterZhu</a>
+    <a class="myemail">jupyterzhu@gmail.com</a>
+</div>
+<script src="/static/iknow.js"></script>
 </body>
 </html>
 <div id="uploadimageModal" class="modal" role="dialog">
@@ -261,3 +320,8 @@
     <div class="canvas"></div>
     <path d="M80,325C240,325 240,125 400,125" class="link-base" style="z-index: 9999;"></path>
 </div>
+<div class="label-control" style="display: none;">
+    <button value="-1"><i class="roll" style="color: #5cb85c"></i></button>
+    <button value="-1"><i class="del" style="color: darkorange"></i></button>
+</div>
+<svg class="loader" style="display: none"><circle cx="18" cy="18" r="12"></circle></svg>

@@ -2,4 +2,6 @@ database/
 .idea/
 images/
 __pycache__/
-datasets/
+/MyVUE/
+/static/model/
+/static/fonts/
